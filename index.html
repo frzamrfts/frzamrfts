@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Firza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('background.jpg'); /* Ganti dengan gambar pilihan Anda */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #6f4e37;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .menu {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+        .menu-item {
+            background: white;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 220px; /* Bisa disesuaikan */
+            text-align: center;
+        }
+        .menu-item img {
+            width: 3cm;
+            height: 4cm;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        footer {
+            background-color: #6f4e37;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        a {
+            color: #f8f1e4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-masuk, .btn-reset {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #6f4e37;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        let nomorMeja = null;
+        let pesanan = [];
+        
+        function tampilkanMenu() {
+            document.querySelector('.menu').style.display = 'flex';
+            document.querySelector('.btn-masuk').style.display = 'none';
+            document.querySelector('.btn-reset').style.display = 'inline-block';
+            nomorMeja = prompt("Masukkan nomor meja Anda:");
+            if (!nomorMeja) {
+                alert("Anda harus memasukkan nomor meja untuk memesan.");
+                document.querySelector('.btn-masuk').style.display = 'block';
+                document.querySelector('.menu').style.display = 'none';
+                document.querySelector('.btn-reset').style.display = 'none';
+            }
+        }
+        
+        function pesanKopi(nama, harga) {
+            if (!nomorMeja) {
+                alert("Silakan masukkan nomor meja terlebih dahulu.");
+                return;
+            }
+            let jumlah = prompt(`Masukkan jumlah pesanan untuk ${nama}:`, 1);
+            if (jumlah && jumlah > 0) {
+                let total = jumlah * harga;
+                pesanan.push(`${jumlah}x ${nama} - Rp${total}`);
+                alert(`Meja ${nomorMeja} telah menambahkan ${jumlah} ${nama} dengan total Rp${total}`);
+            }
+        }
+        
+        function lihatHistori() {
+            if (pesanan.length === 0) {
+                alert("Belum ada pesanan.");
+            } else {
+                alert(`Histori Pesanan untuk Meja ${nomorMeja}:
+${pesanan.join('\n')}`);
+            }
+        }
+        
+        function resetAplikasi() {
+            location.reload();
+        }
+    </script>
+</head>
+<body>
+    <header>Cafe Firza</header>
+    <h2>Menu Kopi</h2>
+    <button class="btn-masuk" onclick="tampilkanMenu()">Masuk untuk melihat harga</button>
+    <button class="btn-reset" onclick="resetAplikasi()" style="display: none;">Balik ke Awal</button>
+    <div class="menu">
+        <div class="menu-item">
+            <img src="americano.jpg" alt="Kopi Americano">
+            <p>Kopi Americano - Rp15.000</p>
+            <button onclick="pesanKopi('Kopi Americano', 15000)">Pesan</button>
+        </div>
+        <div class="menu-item">
+            <img src="hitam.jpg" alt="Kopi Hitam">
+            <p>Kopi Hitam - Rp10.000</p>
+            <button onclick="pesanKopi('Kopi Hitam', 10000)">Pesan</button>
+        </div>
+        <div class="menu-item">
+            <img src="susu.jpg" alt="Kopi Susu">
+            <p>Kopi Susu - Rp15.000</p>
+            <button onclick="pesanKopi('Kopi Susu', 15000)">Pesan</button>
+        </div>
+        <div class="menu-item">
+            <img src="gajah.jpg" alt="Kopi Gajah">
+            <p>Kopi Gajah - Rp13.000</p>
+            <button onclick="pesanKopi('Kopi Gajah', 13000)">Pesan</button>
+        </div>
+        <div class="menu-item">
+            <img src="luwak.jpg" alt="Kopi Luwak">
+            <p>Kopi Luwak - Rp10.000</p>
+            <button onclick="pesanKopi('Kopi Luwak', 10000)">Pesan</button>
+        </div>
+    </div>
+    <button onclick="lihatHistori()">Lihat Histori Pesanan</button>
+    <footer>
+        <p>Hubungi kami: <a href="mailto:firzasapangat@gmail.com">firzasapangat@gmail.com</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/frzamrfts_" target="_blank">@frzamrfts_</a></p>
+        <p>Alamat: Jl. Indah Gang 1, Panusupan - <a href="https://goo.gl/maps/XmC3N5Q5ZQx" target="_blank">Lihat di Google Maps</a></p>
+    </footer>
+</body>
+</html>
